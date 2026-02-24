@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  frontend:
+    build: ./frontend
+    container_name: frontend-container
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      - mern
+    restart: always
+
+  backend:
+    build: ./backend
+    container_name: backend-container
+    ports:
+      - "5000:5000"
+    environment:
+      MYSQL_DATABASE: mysqldatabase
+      MYSQL_USER: Gaurav
+      MYSQL_PASSWORD: Gaurav@123
+    depends_on:
+      - db
+    networks:
+      - mern
+    restart: always
+
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: mysqldatabase
+      MYSQL_USER: Gaurav
+      MYSQL_PASSWORD: Gaurav@123
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - mern
+    restart: always
+
+volumes:
+  mysql-data:
+
+networks:
+  mern:      
+         
+       
+
+     
+  
