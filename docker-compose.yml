@@ -21,6 +21,7 @@ services:
       MYSQL_DATABASE: mysqldatabase
       MYSQL_USER: Gaurav
       MYSQL_PASSWORD: Gaurav@123
+      MYSQL_HOST: db          # ✅ important for container networking
     depends_on:
       - db
     networks:
@@ -37,8 +38,8 @@ services:
       MYSQL_PASSWORD: Gaurav@123
     volumes:
       - mysql-data:/var/lib/mysql
-    ports :
-     -"3306:3306"
+    ports:
+      - "3306:3306"           # ✅ fixed
     networks:
       - mern
     restart: always
@@ -47,7 +48,7 @@ volumes:
   mysql-data:
 
 networks:
-  mern:      
+  mern:     
          
        
 
